@@ -53,6 +53,7 @@ use manta_crypto::{
 use manta_util::future::{LocalBoxFuture, LocalBoxFutureResult};
 use std::collections::{HashMap, HashSet};
 use tokio::sync::RwLock;
+use manta_accounting::transfer::AssetType;
 
 #[cfg(feature = "serde")]
 use manta_util::serde::{Deserialize, Serialize};
@@ -396,6 +397,7 @@ impl TransferLedger<Config> for Ledger {
     #[inline]
     fn update_public_balances(
         &mut self,
+        asset_type: AssetType,
         super_key: &TransferLedgerSuperPostingKey<Config, Self>,
         asset_id: AssetId,
         sources: Vec<SourcePostingKey<Config, Self>>,
